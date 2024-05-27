@@ -5,11 +5,11 @@ using ProjectManager.Infrastructure.Entities;
 
 namespace ProjectManager.Infrastructure.Repository;
 
-public class DesignObjectRepository : IDesignObjectRepository
+public class DesignObjectsRepository : IDesignObjectsRepository
 {
     private readonly ProjectManagerDbContext _context;
 
-    public DesignObjectRepository(ProjectManagerDbContext context)
+    public DesignObjectsRepository(ProjectManagerDbContext context)
     {
         _context = context;
     }
@@ -46,7 +46,7 @@ public class DesignObjectRepository : IDesignObjectRepository
         var designObject = await _context.DesignObjects.FindAsync(id);
         if (designObject is null)
         {
-            throw new Exception("designProject not found");
+            throw new Exception("DesignObject not found");
         }
 
         designObject.Id = id;
@@ -64,7 +64,7 @@ public class DesignObjectRepository : IDesignObjectRepository
         var designObject = await _context.DesignObjects.FindAsync(id);
         if (designObject is null)
         {
-            throw new Exception("designProject not found");
+            throw new Exception("DesignObject not found");
         }
 
         _context.DesignObjects.Remove(designObject);
