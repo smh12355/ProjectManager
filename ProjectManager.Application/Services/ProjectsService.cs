@@ -3,7 +3,7 @@ using ProjectManager.Domain.Models;
 
 namespace ProjectManager.Application.Services;
 
-public class ProjectsService
+public class ProjectsService : IProjectsService
 {
     private readonly IProjectsRepository _projectRepository;
 

@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using ProjectManager.Application.Services;
+using ProjectManager.Domain.Abstractions;
 using ProjectManager.Infrastructure;
+using ProjectManager.Infrastructure.Repository;
 
 namespace ProjectManager
 {
@@ -21,6 +24,8 @@ namespace ProjectManager
                    var connetionString = builder.Configuration.GetConnectionString("DefaultConnection");
                    options.UseMySql(connetionString, ServerVersion.AutoDetect(connetionString));
                });
+            builder.Services.AddScoped<IProjectsService, ProjectsService>();
+            builder.Services.AddScoped<IProjectsRepository, ProjectsRepository>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

@@ -1,34 +1,35 @@
 ﻿using ProjectManager.Domain.Abstractions;
 using ProjectManager.Domain.Models;
+using ProjectManager.Infrastructure.Repository;
 
 namespace ProjectManager.Application.Services;
 
-public class DesignObjectsService
+public class DesignObjectsService : IDesignObjectsService
 {
-    private readonly IProjectsRepository _projectRepository;
+    private readonly IDesignObjectsRepository _designObjectsRepository;
 
-    public DesignObjectsService(IProjectsRepository projectsRepository)
+    public DesignObjectsService(IDesignObjectsRepository designObjectsRepository)
     {
-        _projectRepository = projectsRepository;
+        _designObjectsRepository = designObjectsRepository;
     }
 
-    public async Task<List<Project>> GetAllProjects()
+    public async Task<List<DesignObject>> GetAllDesignObjects()
     {
-        return await _projectRepository.Get();
+        return await _designObjectsRepository.Get();
     }
 
-    public async Task<int> CreateProject(Project project)
+    public async Task<int> CreateDesignObject(DesignObject desighObject)
     {
-        return await _projectRepository.Create(project);
+        return await _designObjectsRepository.Create(desighObject);
     }
 
-    public async Task<int> UpdateProject(int id, string cipher, string name)
+    public async Task<int> UpdateDesignObject(int id, int projectId, string code, string name)
     {
-        return await _projectRepository.Update(id, cipher, name);
+        return await _designObjectsRepository.Update(id, projectId, code, name);
     }
 
-    public async Task<int> DeleteProject(int id)
+    public async Task<int> DeleteDesignObject(int id)
     {
-        return await _projectRepository.Delete(id);
+        return await _designObjectsRepository.Delete(id);
     }
 }
