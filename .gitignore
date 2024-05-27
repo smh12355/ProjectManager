@@ -1,0 +1,31 @@
+﻿# Ignore build output directories
+bin/
+obj/
+
+# Ignore Visual Studio specific folders
+.vs/
+
+# Ignore user-specific files
+*.csproj.user
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Ignore temporary files and logs
+*.tmp
+*.log
+*.pdb
+
+
+# Ignore dependency folders
+node_modules/
+bower_components/
+
+# Ignore SDK auto-generated files
+project.lock.json
+project.fragment.lock.json
+
+# Ignore NuGet packages
+*.nupkg
+packages/
