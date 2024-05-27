@@ -23,7 +23,7 @@ public class ProjectsController : ControllerBase
         return Ok(responce);
     }
     [HttpPost]
-    public async Task<ActionResult<int>> CreateBook([FromBody] ProjectRequest request)
+    public async Task<ActionResult<int>> CreateProject([FromBody] ProjectRequest request)
     {
         var project = new Project(default(int), request.Cipher, request.Name);
         await _projectsService.CreateProject(project);

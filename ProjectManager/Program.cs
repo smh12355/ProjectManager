@@ -26,6 +26,8 @@ namespace ProjectManager
                });
             builder.Services.AddScoped<IProjectsService, ProjectsService>();
             builder.Services.AddScoped<IProjectsRepository, ProjectsRepository>();
+            builder.Services.AddScoped<IDesignObjectsService, DesignObjectsService>();
+            builder.Services.AddScoped<IDesignObjectsRepository, DesignObjectsRepository>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
