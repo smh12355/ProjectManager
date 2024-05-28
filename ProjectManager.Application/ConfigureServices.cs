@@ -10,6 +10,7 @@ public static class ConfigureServices
     {
 
         services.AddScoped<IProjectsService, ProjectsService>();
+        services.AddScoped<IDesignObjectsService, DesignObjectsService>();
 
         return services;
     }

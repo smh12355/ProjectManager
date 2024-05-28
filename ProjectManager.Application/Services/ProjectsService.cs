@@ -13,7 +13,7 @@ public class ProjectsService : IProjectsService
         _dbContext = dbContext;
     }
 
-    public async Task<List<Project>> GetAllProjects()
+    public async Task<List<Project>> GetList()
     {
         return await _dbContext.Projects
             .AsNoTracking()
@@ -21,15 +21,24 @@ public class ProjectsService : IProjectsService
             .ToListAsync();
     }
 
-    public async Task<List<DesignObject>> GetDesignObjectsByProjectId(int projectId)
+    public async Task<List<ProjectDetailsDto>> GerProjectsWithDesignObjects()
     {
-        return await _dbContext.DesignObjects
+        return await _dbContext.Projects
             .AsNoTracking()
-            .Where(a => a.ProjectId == projectId)
-            .Select(a => new DesignObject(a.Id, a.ParentDesignObjectId, a.Code, a.Name))
+            .Include(a => a.DesignObjects)
+            .Select(a => new ProjectDetailsDto(
+                a.Id,
+                a.Cipher,
+                a.Name,
+                a.DesignObjects.Select(b => new DesignObjectDetailsDto(
+                    b.Id,
+                    b.Name,
+                    b.Code,
+                    new List<DocSetDetailsDto>())).ToList()
+            ))
             .ToListAsync();
     }
-    public async Task<List<ProjectDetailsDto>> GetFullDataByClick(int id)
+    public async Task<ProjectDetailsDto> GetFullDataByClick(int id)
     {
         var includedEntities = await _dbContext.Projects
             .AsNoTracking()
@@ -49,7 +58,7 @@ public class ProjectsService : IProjectsService
                         c.Mark,
                         c.Number)).ToList()
                     )).ToList()
-                    )).ToListAsync();
+                    )).FirstOrDefaultAsync();
         return includedEntities;
     }
 }

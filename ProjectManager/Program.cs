@@ -10,19 +10,18 @@ namespace ProjectManager
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
+            //контроллеры
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            //swagger
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            //db и сервисы
             builder.Services.AddInfrastructureServices(builder.Configuration);
             builder.Services.AddApplicationServices();
-            //builder.Services.AddScoped<IDesignObjectsService, DesignObjectsService>();
-            //builder.Services.AddScoped<IDesignObjectsRepository, DesignObjectsRepository>();
+
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+            // смотрим launchSettings.json
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -30,9 +29,6 @@ namespace ProjectManager
             }
 
             app.UseHttpsRedirection();
-
-            app.UseAuthorization();
-
 
             app.MapControllers();
 
