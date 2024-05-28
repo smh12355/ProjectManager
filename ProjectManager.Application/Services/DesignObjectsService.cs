@@ -1,6 +1,5 @@
 ﻿using ProjectManager.Domain.Abstractions;
 using ProjectManager.Domain.Models;
-using ProjectManager.Infrastructure.Repository;
 
 namespace ProjectManager.Application.Services;
 

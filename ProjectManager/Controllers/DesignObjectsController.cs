@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjectManager.Contracts;
-using ProjectManager.Domain.Abstractions;
+using ProjectManager.Application.Abstractions;
 using ProjectManager.Domain.Models;
+using ProjectManager.Domain.Abstractions;
 
 namespace ProjectManager.Controllers;
 

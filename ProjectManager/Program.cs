@@ -1,8 +1,8 @@
-using Microsoft.EntityFrameworkCore;
 using ProjectManager.Application.Services;
 using ProjectManager.Domain.Abstractions;
-using ProjectManager.Infrastructure;
 using ProjectManager.Infrastructure.Repository;
+using ProjectManager.Infrastructure;
+using ProjectManager.Application;
 
 namespace ProjectManager
 {
@@ -18,16 +18,10 @@ namespace ProjectManager
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddDbContext<ProjectManagerDbContext>(
-               options =>
-               {
-                   var connetionString = builder.Configuration.GetConnectionString("DefaultConnection");
-                   options.UseMySql(connetionString, ServerVersion.AutoDetect(connetionString));
-               });
-            builder.Services.AddScoped<IProjectsService, ProjectsService>();
-            builder.Services.AddScoped<IProjectsRepository, ProjectsRepository>();
-            builder.Services.AddScoped<IDesignObjectsService, DesignObjectsService>();
-            builder.Services.AddScoped<IDesignObjectsRepository, DesignObjectsRepository>();
+            builder.Services.AddInfrastructureServices(builder.Configuration);
+            builder.Services.AddApplicationServices();
+            //builder.Services.AddScoped<IDesignObjectsService, DesignObjectsService>();
+            //builder.Services.AddScoped<IDesignObjectsRepository, DesignObjectsRepository>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
