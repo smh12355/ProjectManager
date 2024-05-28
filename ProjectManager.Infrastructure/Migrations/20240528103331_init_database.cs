@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProjectManager.Infrastructure.Migrations
 {
-    public partial class init_db : Migration
+    public partial class init_database : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -36,6 +36,7 @@ namespace ProjectManager.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ProjectId = table.Column<int>(type: "int", nullable: false),
+                    ParentDesignObjectId = table.Column<int>(type: "int", nullable: true),
                     Code = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Name = table.Column<string>(type: "longtext", nullable: false)
@@ -44,6 +45,12 @@ namespace ProjectManager.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DesignObjects", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DesignObjects_DesignObjects_ParentDesignObjectId",
+                        column: x => x.ParentDesignObjectId,
+                        principalTable: "DesignObjects",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_DesignObjects_Projects_ProjectId",
                         column: x => x.ProjectId,
@@ -74,6 +81,11 @@ namespace ProjectManager.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DesignObjects_ParentDesignObjectId",
+                table: "DesignObjects",
+                column: "ParentDesignObjectId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DesignObjects_ProjectId",

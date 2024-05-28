@@ -24,8 +24,16 @@ public class ProjectsService : IProjectsService
     public async Task<List<DesignObject>> GetProjectDesignObjects(int id)
     {
         return await _dbContext.DesignObjects
+            .AsNoTracking()
             .Where(a => a.ProjectId == id)
-            .Select(a => new DesignObject(a.Id, a.Code, a.Name))
+            .Select(a => new DesignObject(a.Id, a.ParentDesignObjectId, a.Code, a.Name))
             .ToListAsync();
     }
+    //public async Task<List<>> GetFullDataByClick(int id)
+    //{
+    //    return await _dbContext.Projects
+    //        .AsNoTracking()
+    //        .Select(a => new Project(a.Id, a.Cipher, a.Name))
+    //        .ToListAsync();
+    //}
 }
