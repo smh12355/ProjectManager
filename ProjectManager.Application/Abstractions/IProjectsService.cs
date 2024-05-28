@@ -1,11 +1,10 @@
 ﻿using ProjectManager.Domain.Models;
 
-namespace ProjectManager.Domain.Abstractions;   
-
-public interface IProjectsService
+namespace ProjectManager.Application.Abstractions
 {
-    Task<int> CreateProject(Project project);
-    Task<int> DeleteProject(int id);
-    Task<List<Project>> GetAllProjects();
-    Task<int> UpdateProject(int id, string cipher, string name);
+    public interface IProjectsService
+    {
+        Task<List<Project>> GetAllProjects();
+        Task<List<DesignObject>> GetProjectDesignObjects(int id);
+    }
 }

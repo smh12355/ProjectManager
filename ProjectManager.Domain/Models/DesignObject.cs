@@ -1,3 +1,3 @@
 ﻿namespace ProjectManager.Domain.Models;
 
-public record DesignObject(int Id, int ProjectId, string Code, string Name);
+public record DesignObject(int Id, string Code, string Name);

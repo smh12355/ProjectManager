@@ -10,8 +10,8 @@ using ProjectManager.Infrastructure;
 namespace ProjectManager.Infrastructure.Migrations
 {
     [DbContext(typeof(ProjectManagerDbContext))]
-    [Migration("20240527061720_init")]
-    partial class init
+    [Migration("20240528053739_add_data_to_db")]
+    partial class add_data_to_db
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

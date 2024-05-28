@@ -5,7 +5,7 @@ using ProjectManager.Domain.Models;
 
 namespace ProjectManager.Infrastructure.Migrations
 {
-    public partial class AddData : Migration
+    public partial class add_data_to_db : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using ProjectManager.Application.Abstractions;
 using ProjectManager.Application.Services;
-using ProjectManager.Domain.Abstractions;
 
 namespace ProjectManager.Application;
 

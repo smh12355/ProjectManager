@@ -1,6 +1,4 @@
 using ProjectManager.Application.Services;
-using ProjectManager.Domain.Abstractions;
-using ProjectManager.Infrastructure.Repository;
 using ProjectManager.Infrastructure;
 using ProjectManager.Application;
 

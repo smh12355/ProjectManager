@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProjectManager.Application.Abstractions;
 using ProjectManager.Contracts;
-using ProjectManager.Domain.Abstractions;
 using ProjectManager.Domain.Models;
 
 namespace ProjectManager.Controllers;
@@ -16,17 +16,15 @@ public class ProjectsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<Project>>> GetProjects()
+    public async Task<ActionResult<List<Project>>> GetAllProjects()
     {
         var projects = await _projectsService.GetAllProjects();
-        var responce = projects.Select(a => new Project(a.Id, a.Cipher, a.Name));
-        return Ok(responce);
+        return Ok(projects);
     }
-    [HttpPost]
-    public async Task<ActionResult<int>> CreateProject([FromBody] ProjectRequest request)
+    [HttpGet("{projectId}/DesignObjects")]
+    public async Task<ActionResult<List<DesignObject>>> GetProjectDesignObjects(int projectId)
     {
-        var project = new Project(default(int), request.Cipher, request.Name);
-        await _projectsService.CreateProject(project);
-        return Ok(project.Id);
+        var projectDesignObjects = await _projectsService.GetProjectDesignObjects(projectId);
+        return Ok(projectDesignObjects);
     }
 }
