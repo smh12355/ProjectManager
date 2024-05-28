@@ -5,6 +5,7 @@ namespace ProjectManager.Application.Abstractions
     public interface IProjectsService
     {
         Task<List<Project>> GetAllProjects();
-        Task<List<DesignObject>> GetProjectDesignObjects(int id);
+        Task<List<DesignObject>> GetDesignObjectsByProjectId(int projectId);
+        Task<List<ProjectDetailsDto>> GetFullDataByClick(int id);
     }
 }

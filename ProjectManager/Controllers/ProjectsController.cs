@@ -22,9 +22,15 @@ public class ProjectsController : ControllerBase
         return Ok(projects);
     }
     [HttpGet("{projectId}/DesignObjects")]
-    public async Task<ActionResult<List<DesignObject>>> GetProjectDesignObjects(int projectId)
+    public async Task<ActionResult<List<DesignObject>>> GetDesignObjectsByProjectId(int projectId)
     {
-        var projectDesignObjects = await _projectsService.GetProjectDesignObjects(projectId);
+        var projectDesignObjects = await _projectsService.GetDesignObjectsByProjectId(projectId);
+        return Ok(projectDesignObjects);
+    }
+    [HttpGet("/JoinedEntities")]
+    public async Task<ActionResult<List<ProjectDetailsDto>>> GetFullDataByClick(int projectId)
+    {
+        var projectDesignObjects = await _projectsService.GetFullDataByClick(projectId);
         return Ok(projectDesignObjects);
     }
 }
