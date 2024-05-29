@@ -19,16 +19,7 @@ public static class ConfigureServices
     }
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
-
-        services.AddDbContext<ProjectManagerDbContext>(
-            options =>
-            {
-                var connetionString = configuration.GetConnectionString("DefaultConnection");
-                options.UseMySql(connetionString, ServerVersion.AutoDetect(connetionString));
-            });
-
-        services.AddScoped<IProjectManagerDbContext>(provider => provider.GetRequiredService<ProjectManagerDbContext>());
-
+        services.AddInfrastructureServicesInfrastructureLayer(configuration);
         return services;
     }
 }
