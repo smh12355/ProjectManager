@@ -18,9 +18,9 @@ namespace ProjectManager.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Cipher = table.Column<string>(type: "longtext", nullable: false)
+                    Cipher = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Name = table.Column<string>(type: "longtext", nullable: false)
+                    Name = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -35,11 +35,11 @@ namespace ProjectManager.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ProjectId = table.Column<int>(type: "int", nullable: false),
+                    ProjectId = table.Column<int>(type: "int", nullable: true),
                     ParentDesignObjectId = table.Column<int>(type: "int", nullable: true),
-                    Code = table.Column<string>(type: "longtext", nullable: false)
+                    Code = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Name = table.Column<string>(type: "longtext", nullable: false)
+                    Name = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -66,8 +66,8 @@ namespace ProjectManager.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    DesignObjectId = table.Column<int>(type: "int", nullable: false),
-                    Mark = table.Column<string>(type: "longtext", nullable: false)
+                    DesignObjectId = table.Column<int>(type: "int", nullable: true),
+                    Mark = table.Column<string>(type: "varchar(2)", maxLength: 2, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Number = table.Column<int>(type: "int", nullable: false)
                 },

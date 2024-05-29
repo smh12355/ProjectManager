@@ -8,9 +8,11 @@ public class ProjectConfig : IEntityTypeConfiguration<ProjectEntity>
 {
     public void Configure(EntityTypeBuilder<ProjectEntity> builder)
     {
-        builder.Property(a => a.Cipher);
+        builder.Property(a => a.Cipher)
+            .HasMaxLength(200);
 
-        builder.Property(a => a.Name);
+        builder.Property(a => a.Name)
+            .HasMaxLength(200);
 
         builder.HasMany(a => a.DesignObjects)
             .WithOne(a => a.Project)

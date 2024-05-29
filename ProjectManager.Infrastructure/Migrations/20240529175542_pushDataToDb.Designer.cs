@@ -11,8 +11,8 @@ using ProjectManager.Infrastructure;
 namespace ProjectManager.Infrastructure.Migrations
 {
     [DbContext(typeof(ProjectManagerDbContext))]
-    [Migration("20240529114155_push_data_to_db")]
-    partial class push_data_to_db
+    [Migration("20240529175542_pushDataToDb")]
+    partial class pushDataToDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,17 +28,17 @@ namespace ProjectManager.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Code")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
 
                     b.Property<int?>("ParentDesignObjectId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProjectId")
+                    b.Property<int?>("ProjectId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -56,12 +56,13 @@ namespace ProjectManager.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("DesignObjectId")
+                    b.Property<int?>("DesignObjectId")
                         .HasColumnType("int");
 
                     b.Property<string>("Mark")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(2)
+                        .HasColumnType("varchar(2)");
 
                     b.Property<int>("Number")
                         .HasColumnType("int");
@@ -80,12 +81,12 @@ namespace ProjectManager.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Cipher")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
 
                     b.HasKey("Id");
 
@@ -97,14 +98,12 @@ namespace ProjectManager.Infrastructure.Migrations
                     b.HasOne("ProjectManager.Domain.Entities.DesignObjectEntity", "ParentDesignObject")
                         .WithMany("ChildrenDesignObjects")
                         .HasForeignKey("ParentDesignObjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ProjectManager.Domain.Entities.ProjectEntity", "Project")
                         .WithMany("DesignObjects")
                         .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("ParentDesignObject");
 
@@ -116,8 +115,7 @@ namespace ProjectManager.Infrastructure.Migrations
                     b.HasOne("ProjectManager.Domain.Entities.DesignObjectEntity", "DesignObject")
                         .WithMany("DocSets")
                         .HasForeignKey("DesignObjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("DesignObject");
                 });

@@ -8,10 +8,11 @@ public class DesignObjectConfig : IEntityTypeConfiguration<DesignObjectEntity>
 {
     public void Configure(EntityTypeBuilder<DesignObjectEntity> builder)
     {
-        builder.Property(a => a.Code);
+        builder.Property(a => a.Code)
+            .HasMaxLength(200);
 
-        builder.Property(a => a.Name);
-        builder.Property(a => a.ParentDesignObjectId).IsRequired(false);
+        builder.Property(a => a.Name)
+            .HasMaxLength(200);
 
         builder.HasMany(a => a.ChildrenDesignObjects)
             .WithOne(a => a.ParentDesignObject)

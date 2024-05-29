@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ProjectManager.Application.Abstractions;
 
 namespace ProjectManager.Infrastructure;
 
 public static class ConfigureServices
 {
-    public static IServiceCollection AddInfrastructureServicesInfrastructureLayer(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
-
         services.AddDbContext<ProjectManagerDbContext>(
             options =>
             {

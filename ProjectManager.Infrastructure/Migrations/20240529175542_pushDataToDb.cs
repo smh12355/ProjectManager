@@ -1,11 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
-using ProjectManager.Domain.Entities;
 
 #nullable disable
 
 namespace ProjectManager.Infrastructure.Migrations
 {
-    public partial class push_data_to_db : Migration
+    public partial class pushDataToDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,7 +18,10 @@ namespace ProjectManager.Infrastructure.Migrations
                     { 2, "PRJ002", "Project Beta" },
                     { 3, "PRJ003", "Project Gamma" },
                     { 4, "PRJ004", "Project Delta" },
-                    { 5, "PRJ005", "Project Epsilon" }
+                    { 5, "PRJ005", "Project Epsilon" },
+                    { 6, null, null },
+                    { 7, null, null },
+                    { 8, null, null }
                 });
 
             // Adding sample data to DesignObjectEntity
@@ -39,7 +41,10 @@ namespace ProjectManager.Infrastructure.Migrations
                     { 9, 4, 8, "DO009", "Design Object 9 - third layer" },
                     { 10, 5, null, "DO010", "Design Object 10 - first layer" },
                     { 11, 5, 10, "DO011", "Design Object 11 - second layer" },
-                    { 12, 5, 11, "DO012", "Design Object 12 - third layer" }
+                    { 12, 5, 11, "DO012", "Design Object 12 - third layer" },
+                    { 13, null, null, null, null },
+                    { 14, null, null, null, null  },
+                    { 15, null, null, null, null }
                 });
 
             // Adding sample data to DocSetEntity
@@ -78,7 +83,11 @@ namespace ProjectManager.Infrastructure.Migrations
                     { 28, 11, "AC", 1 },
                     { 29, 11, "CM", 2 },
                     { 30, 12, "TX", 0 },
-                    { 31, 12, "AC", 1 }
+                    { 31, 12, "AC", 1 },
+                    { 32, null, "AC", 1234 },
+                    { 33, null, "AC", 1235 },
+                    { 34, null, "AC", 1236 },
+                    { 35, null, "AC", 1237 }
                 });
         }
 
@@ -92,7 +101,8 @@ namespace ProjectManager.Infrastructure.Migrations
                 {
                     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
                     13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
-                    23, 24, 25, 26, 27, 28, 29, 30, 31
+                    23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
+                    33, 34, 35
                 });
 
             migrationBuilder.DeleteData(
@@ -100,13 +110,13 @@ namespace ProjectManager.Infrastructure.Migrations
                 keyColumn: "Id",
                 keyValues: new object[]
                 {
-                    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+                    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
                 });
 
             migrationBuilder.DeleteData(
                 table: "Projects",
                 keyColumn: "Id",
-                keyValues: new object[] { 1, 2, 3, 4, 5 });
+                keyValues: new object[] { 1, 2, 3, 4, 5, 6, 7, 8 });
         }
     }
 }

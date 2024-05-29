@@ -3,7 +3,6 @@ using ProjectManager.Application.Abstractions;
 using ProjectManager.Domain.Contracts.DesignObject;
 using ProjectManager.Domain.Contracts.Project;
 using ProjectManager.Domain.Models;
-using ProjectManager.Infrastructure;
 
 namespace ProjectManager.Application.Services;
 
@@ -21,11 +20,13 @@ public class ProjectsService : IProjectsService
             .Select(a => new ProjectResponce(a.Id, a.Cipher, a.Name))
             .ToListAsync();
 
+#pragma warning disable CS8603 // Возможно, возврат ссылки, допускающей значение NULL.
     public async Task<ProjectResponce> GetById(int id) => await _dbContext.Projects
             .AsNoTracking()
             .Where(a => a.Id == id)
-            .Select(a => new ProjectResponce(a.Id, a.Cipher,a.Name))
+            .Select(a => new ProjectResponce(a.Id, a.Cipher, a.Name))
             .FirstOrDefaultAsync();
+#pragma warning restore CS8603 // Возможно, возврат ссылки, допускающей значение NULL.
 
     public async Task<List<ProjectIncludingDesignObjectResponce>> GetListInludingDesignObjects() => await _dbContext.Projects
             .AsNoTracking()
