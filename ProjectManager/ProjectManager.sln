@@ -3,13 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectManager", "ProjectManager.csproj", "{1335B7CC-81C2-4996-9269-F6BCE79931B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectManager", "ProjectManager.csproj", "{1335B7CC-81C2-4996-9269-F6BCE79931B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectManager.Application", "..\ProjectManager.Application\ProjectManager.Application.csproj", "{EE54A7D8-1691-4203-B995-20C000EAA563}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectManager.Application", "..\ProjectManager.Application\ProjectManager.Application.csproj", "{EE54A7D8-1691-4203-B995-20C000EAA563}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectManager.Infrastructure", "..\ProjectManager.Infrastructure\ProjectManager.Infrastructure.csproj", "{2B65F78D-A946-44A3-9F30-23E8B91F6AB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectManager.Infrastructure", "..\ProjectManager.Infrastructure\ProjectManager.Infrastructure.csproj", "{2B65F78D-A946-44A3-9F30-23E8B91F6AB5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EE54A7D8-1691-4203-B995-20C000EAA563} = {EE54A7D8-1691-4203-B995-20C000EAA563}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectManager.Domain", "..\ProjectManager.Domain\ProjectManager.Domain.csproj", "{CEC301FA-07B4-44FA-BE39-9FD01DD34A37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectManager.Domain", "..\ProjectManager.Domain\ProjectManager.Domain.csproj", "{CEC301FA-07B4-44FA-BE39-9FD01DD34A37}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

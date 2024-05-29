@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProjectManager.Application.Abstractions;
 using ProjectManager.Domain.Models;
+using ProjectManager.Infrastructure;
 
 namespace ProjectManager.Application.Services;
 

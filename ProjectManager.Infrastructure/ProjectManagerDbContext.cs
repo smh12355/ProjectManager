@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ProjectManager.Application.Abstractions;
-using ProjectManager.Infrastructure.Entities;
+using ProjectManager.Domain.Entities;
+using ProjectManager.Infrastructure;
 using System.Reflection;
 
 namespace ProjectManager.Infrastructure;

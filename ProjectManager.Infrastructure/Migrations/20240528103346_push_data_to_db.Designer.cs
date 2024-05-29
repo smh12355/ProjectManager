@@ -10,7 +10,7 @@ using ProjectManager.Infrastructure;
 
 namespace ProjectManager.Infrastructure.Migrations
 {
-    [DbContext(typeof(ProjectManagerDbContext))]
+    [DbContext(typeof(IProjectManagerDbContext))]
     [Migration("20240528103346_push_data_to_db")]
     partial class push_data_to_db
     {

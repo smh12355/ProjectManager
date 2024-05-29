@@ -1,3 +1,3 @@
-﻿namespace ProjectManager.Contracts;
+﻿namespace ProjectManager.Domain.Contracts;
 
 public record ProjectRequest(int Id);

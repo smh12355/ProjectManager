@@ -10,7 +10,7 @@ using ProjectManager.Infrastructure;
 
 namespace ProjectManager.Infrastructure.Migrations
 {
-    [DbContext(typeof(ProjectManagerDbContext))]
+    [DbContext(typeof(IProjectManagerDbContext))]
     [Migration("20240528103331_init_database")]
     partial class init_database
     {

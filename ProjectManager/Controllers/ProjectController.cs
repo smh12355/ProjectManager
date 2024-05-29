@@ -1,16 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjectManager.Application.Abstractions;
-using ProjectManager.Contracts;
 using ProjectManager.Domain.Models;
 
 namespace ProjectManager.Controllers;
 [ApiController]
-[Route("[controller]")]
-public class ProjectsController : ControllerBase
+[Route("api/[controller]")]
+public class ProjectController : ControllerBase
 {
     private readonly IProjectsService _projectsService;
 
-    public ProjectsController(IProjectsService projectsService)
+    public ProjectController(IProjectsService projectsService)
     {
         _projectsService = projectsService;
     }

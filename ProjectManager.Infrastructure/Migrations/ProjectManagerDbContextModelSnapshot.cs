@@ -9,7 +9,7 @@ using ProjectManager.Infrastructure;
 
 namespace ProjectManager.Infrastructure.Migrations
 {
-    [DbContext(typeof(ProjectManagerDbContext))]
+    [DbContext(typeof(IProjectManagerDbContext))]
     partial class ProjectManagerDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
