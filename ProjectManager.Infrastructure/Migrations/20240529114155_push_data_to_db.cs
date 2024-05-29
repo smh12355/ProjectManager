@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
-using ProjectManager.Domain.Models;
+using ProjectManager.Domain.Entities;
 
 #nullable disable
 
@@ -48,37 +48,37 @@ namespace ProjectManager.Infrastructure.Migrations
                 columns: new[] { "Id", "DesignObjectId", "Mark", "Number" },
                 values: new object[,]
                 {
-                    { 1, 1, (int)Mark.TX, 0 },
-                    { 2, 1, (int)Mark.AC, 1 },
-                    { 3, 1, (int)Mark.CM, 2 },
-                    { 4, 2, (int)Mark.TX, 0 },
-                    { 5, 2, (int)Mark.AC, 1 },
-                    { 6, 2, (int)Mark.CM, 2 },
-                    { 7, 3, (int)Mark.TX, 0 },
-                    { 8, 3, (int)Mark.AC, 1 },
-                    { 9, 4, (int)Mark.TX, 0 },
-                    { 10, 4, (int)Mark.AC, 1 },
-                    { 11, 4, (int)Mark.CM, 2 },
-                    { 12, 5, (int)Mark.TX, 0 },
-                    { 13, 5, (int)Mark.AC, 1 },
-                    { 14, 6, (int)Mark.TX, 0 },
-                    { 15, 6, (int)Mark.AC, 1 },
-                    { 16, 6, (int)Mark.CM, 2 },
-                    { 17, 7, (int)Mark.TX, 0 },
-                    { 18, 7, (int)Mark.AC, 1 },
-                    { 19, 8, (int)Mark.TX, 0 },
-                    { 20, 8, (int)Mark.AC, 1 },
-                    { 21, 8, (int)Mark.CM, 2 },
-                    { 22, 9, (int)Mark.TX, 0 },
-                    { 23, 9, (int)Mark.AC, 1 },
-                    { 24, 9, (int)Mark.CM, 2 },
-                    { 25, 10, (int)Mark.TX, 0 },
-                    { 26, 10, (int)Mark.AC, 1 },
-                    { 27, 11, (int)Mark.TX, 0 },
-                    { 28, 11, (int)Mark.AC, 1 },
-                    { 29, 11, (int)Mark.CM, 2 },
-                    { 30, 12, (int)Mark.TX, 0 },
-                    { 31, 12, (int)Mark.AC, 1 }
+                    { 1, 1, "TX", 0 },
+                    { 2, 1, "AC", 1 },
+                    { 3, 1, "CM", 2 },
+                    { 4, 2, "TX", 0 },
+                    { 5, 2, "AC", 1 },
+                    { 6, 2, "CM", 2 },
+                    { 7, 3, "TX", 0 },
+                    { 8, 3, "AC", 1 },
+                    { 9, 4, "TX", 0 },
+                    { 10, 4, "AC", 1 },
+                    { 11, 4, "CM", 2 },
+                    { 12, 5, "TX", 0 },
+                    { 13, 5, "AC", 1 },
+                    { 14, 6, "TX", 0 },
+                    { 15, 6, "AC", 1 },
+                    { 16, 6, "CM", 2 },
+                    { 17, 7, "TX", 0 },
+                    { 18, 7, "AC", 1 },
+                    { 19, 8, "TX", 0 },
+                    { 20, 8, "AC", 1 },
+                    { 21, 8, "CM", 2 },
+                    { 22, 9, "TX", 0 },
+                    { 23, 9, "AC", 1 },
+                    { 24, 9, "CM", 2 },
+                    { 25, 10, "TX", 0 },
+                    { 26, 10, "AC", 1 },
+                    { 27, 11, "TX", 0 },
+                    { 28, 11, "AC", 1 },
+                    { 29, 11, "CM", 2 },
+                    { 30, 12, "TX", 0 },
+                    { 31, 12, "AC", 1 }
                 });
         }
 
@@ -108,6 +108,5 @@ namespace ProjectManager.Infrastructure.Migrations
                 keyColumn: "Id",
                 keyValues: new object[] { 1, 2, 3, 4, 5 });
         }
-    
     }
 }

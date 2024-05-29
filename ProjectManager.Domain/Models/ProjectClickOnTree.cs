@@ -1,4 +1,6 @@
-﻿namespace ProjectManager.Domain.Models;
+﻿using ProjectManager.Domain.Entities;
+
+namespace ProjectManager.Domain.Models;
 
 //public record ProjectClickOnTree(string Cipher, string DesignObjectHierarchyCode, int Mark, int DocSetNumberWithMark, int SumOfShipres);
 //public record SimpleOne(int projectId, string designObjectChiefre, string projectName,

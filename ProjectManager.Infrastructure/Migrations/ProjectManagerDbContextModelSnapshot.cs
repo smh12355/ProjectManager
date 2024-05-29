@@ -9,7 +9,7 @@ using ProjectManager.Infrastructure;
 
 namespace ProjectManager.Infrastructure.Migrations
 {
-    [DbContext(typeof(IProjectManagerDbContext))]
+    [DbContext(typeof(ProjectManagerDbContext))]
     partial class ProjectManagerDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -19,7 +19,7 @@ namespace ProjectManager.Infrastructure.Migrations
                 .HasAnnotation("ProductVersion", "6.0.30")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("ProjectManager.Infrastructure.Entities.DesignObjectEntity", b =>
+            modelBuilder.Entity("ProjectManager.Domain.Entities.DesignObjectEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -48,7 +48,7 @@ namespace ProjectManager.Infrastructure.Migrations
                     b.ToTable("DesignObjects");
                 });
 
-            modelBuilder.Entity("ProjectManager.Infrastructure.Entities.DocSetEntity", b =>
+            modelBuilder.Entity("ProjectManager.Domain.Entities.DocSetEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -57,8 +57,9 @@ namespace ProjectManager.Infrastructure.Migrations
                     b.Property<int>("DesignObjectId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Mark")
-                        .HasColumnType("int");
+                    b.Property<string>("Mark")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<int>("Number")
                         .HasColumnType("int");
@@ -70,7 +71,7 @@ namespace ProjectManager.Infrastructure.Migrations
                     b.ToTable("DocSets");
                 });
 
-            modelBuilder.Entity("ProjectManager.Infrastructure.Entities.ProjectEntity", b =>
+            modelBuilder.Entity("ProjectManager.Domain.Entities.ProjectEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -89,15 +90,15 @@ namespace ProjectManager.Infrastructure.Migrations
                     b.ToTable("Projects");
                 });
 
-            modelBuilder.Entity("ProjectManager.Infrastructure.Entities.DesignObjectEntity", b =>
+            modelBuilder.Entity("ProjectManager.Domain.Entities.DesignObjectEntity", b =>
                 {
-                    b.HasOne("ProjectManager.Infrastructure.Entities.DesignObjectEntity", "ParentDesignObject")
+                    b.HasOne("ProjectManager.Domain.Entities.DesignObjectEntity", "ParentDesignObject")
                         .WithMany("ChildrenDesignObjects")
                         .HasForeignKey("ParentDesignObjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ProjectManager.Infrastructure.Entities.ProjectEntity", "Project")
+                    b.HasOne("ProjectManager.Domain.Entities.ProjectEntity", "Project")
                         .WithMany("DesignObjects")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -108,9 +109,9 @@ namespace ProjectManager.Infrastructure.Migrations
                     b.Navigation("Project");
                 });
 
-            modelBuilder.Entity("ProjectManager.Infrastructure.Entities.DocSetEntity", b =>
+            modelBuilder.Entity("ProjectManager.Domain.Entities.DocSetEntity", b =>
                 {
-                    b.HasOne("ProjectManager.Infrastructure.Entities.DesignObjectEntity", "DesignObject")
+                    b.HasOne("ProjectManager.Domain.Entities.DesignObjectEntity", "DesignObject")
                         .WithMany("DocSets")
                         .HasForeignKey("DesignObjectId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -119,14 +120,14 @@ namespace ProjectManager.Infrastructure.Migrations
                     b.Navigation("DesignObject");
                 });
 
-            modelBuilder.Entity("ProjectManager.Infrastructure.Entities.DesignObjectEntity", b =>
+            modelBuilder.Entity("ProjectManager.Domain.Entities.DesignObjectEntity", b =>
                 {
                     b.Navigation("ChildrenDesignObjects");
 
                     b.Navigation("DocSets");
                 });
 
-            modelBuilder.Entity("ProjectManager.Infrastructure.Entities.ProjectEntity", b =>
+            modelBuilder.Entity("ProjectManager.Domain.Entities.ProjectEntity", b =>
                 {
                     b.Navigation("DesignObjects");
                 });
