@@ -105,8 +105,11 @@ public class ProjectsService : IProjectsService
         var projects = _dbContext.Projects
             .AsNoTracking()
             .Include(a => a.DesignObjects)
-            .ThenInclude(a => a.ChildrenDesignObjects)
+            .ThenInclude(a => a.ParentDesignObject)
             .ToList();
+        var anotherprojects = _dbContext.DesignObjects
+            .AsNoTracking()
+            .Include(a => a.ChildrenDesignObjects);
         //var mydatalist = new List<new { int Cipher, string FullCode } >();
         var mydatalist = new List<(string Cipher, string FullCode)>();
         foreach (var project in projects)
@@ -115,16 +118,31 @@ public class ProjectsService : IProjectsService
             {
                 var fullCode = new StringBuilder();
                 var indicate = designOjbect;
-                fullCode.Append(indicate.Code);
-                while (indicate.ParentDesignObject is not null)
+                if (indicate.ChildrenDesignObjects.Count is 0)
                 {
-                    indicate = designOjbect.ParentDesignObject;
-                    fullCode.Append('.');
-                    fullCode.Append(indicate.Code);
+                    mydatalist.Add((project.Cipher, indicate.Code));
+                    continue;
+                }
+                else
+                {
+                    while (indicate.ChildrenDesignObjects.Count is not 0)
+                    {
+                        fullCode.Append(indicate.Code);
+                        fullCode.Append('.');
+                        indicate = designOjbect.ParentDesignObject;
+                        foreach (var item in mydatalist)
+                        {
+                            
+                        }
+                    }
                 }
                 mydatalist.Add((project.Cipher, fullCode.ToString()));
             }
         }
+        //void somefunc(var1,var2,var3)
+        //{
+
+        //}
         return await _dbContext.Projects
             .AsNoTracking()
             .SelectMany(project => project.DesignObjects
