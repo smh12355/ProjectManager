@@ -34,6 +34,10 @@ public class ProjectController : ControllerBase
     public async Task<ActionResult<List<ProjectIncludingDesignObjectResponce>>> GetListInludingDesignObjects() =>
         Ok(await _projectsService.GetListInludingDesignObjects());
 
+    [HttpGet("ProjectsListInludingAllEntities")]
+    public async Task<ActionResult<List<ProjectIncludeAllObjects>>> GetListInludingAllEntities() =>
+        Ok(await _projectsService.GetListInludingAllEntities());
+
     [HttpGet("/JoinedEntities")]
     public async Task<ActionResult<ProjectDetailsDto>> GetFullDataByClick(int projectId)
     {

@@ -9,5 +9,6 @@ namespace ProjectManager.Application.Abstractions
         Task<ProjectResponce> GetById(int id);
         Task<List<ProjectIncludingDesignObjectResponce>> GetListInludingDesignObjects();
         Task<ProjectDetailsDto> GetFullDataByClick(int id);
+        Task<List<ProjectIncludeAllObjects>> GetListInludingAllEntities();
     }
 }

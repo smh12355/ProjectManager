@@ -11,8 +11,8 @@ using ProjectManager.Infrastructure;
 namespace ProjectManager.Infrastructure.Migrations
 {
     [DbContext(typeof(ProjectManagerDbContext))]
-    [Migration("20240529175542_pushDataToDb")]
-    partial class pushDataToDb
+    [Migration("20240530110318_push_data")]
+    partial class push_data
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

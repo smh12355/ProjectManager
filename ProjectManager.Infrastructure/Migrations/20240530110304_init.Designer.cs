@@ -11,7 +11,7 @@ using ProjectManager.Infrastructure;
 namespace ProjectManager.Infrastructure.Migrations
 {
     [DbContext(typeof(ProjectManagerDbContext))]
-    [Migration("20240529175403_init")]
+    [Migration("20240530110304_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
