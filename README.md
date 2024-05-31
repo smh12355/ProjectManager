@@ -22,7 +22,6 @@
    ```sh
    docker-compose up
    ```
-   **Примечание**: Docker Hub заблокирован, поэтому образ MySQL пока не подтягивается.
 2. Примените миграции в корне репозитория:
    ```sh
    dotnet ef database update -s ProjectManager --project ProjectManager.Infrastructure/
