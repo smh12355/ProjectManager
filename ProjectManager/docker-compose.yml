@@ -2,7 +2,7 @@
 
 services:
   db:
-    image: mysql:8.0
+    image: ghcr.io/smh12355/projectmanager:latest
     container_name: database
     environment:
       MYSQL_DATABASE: db
