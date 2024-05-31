@@ -1,6 +1,4 @@
-﻿using ProjectManager.Domain.Models;
-
-namespace ProjectManager.Domain.Entities;
+﻿namespace ProjectManager.Domain.Entities;
 
 public class DesignObjectEntity
 {

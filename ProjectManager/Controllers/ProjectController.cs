@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjectManager.Application.Abstractions;
 using ProjectManager.Domain.Contracts.Project;
-using ProjectManager.Domain.Models;
 
 namespace ProjectManager.Controllers;
 [ApiController]
@@ -16,8 +15,10 @@ public class ProjectController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<ProjectResponce>>> GetList() =>
-        Ok(await _projectsService.GetList());
+    public async Task<ActionResult<List<ProjectResponce>>> GetList()
+    {
+        return Ok(await _projectsService.GetList());
+    }
 
     [HttpGet("{ProjectId}")]
     public async Task<ActionResult<ProjectResponce>> GetById(int ProjectId)
@@ -30,18 +31,10 @@ public class ProjectController : ControllerBase
         return Ok(responce);
     }
 
-    [HttpGet("ProjectsListInludingDesignObjects")]
-    public async Task<ActionResult<List<ProjectIncludingDesignObjectResponce>>> GetListInludingDesignObjects() =>
-        Ok(await _projectsService.GetListInludingDesignObjects());
-
-    [HttpGet("ProjectsListInludingAllEntities")]
-    public async Task<ActionResult<List<ProjectIncludeAllObjects>>> GetListInludingAllEntities() =>
-        Ok(await _projectsService.GetListInludingAllEntities());
-
-    [HttpGet("/JoinedEntities")]
-    public async Task<ActionResult<ProjectDetailsDto>> GetFullDataByClick(int projectId)
-    {
-        var projectDesignObjects = await _projectsService.GetFullDataByClick(projectId);
-        return Ok(projectDesignObjects);
+    [HttpGet("IncludeDesignObjects")]
+    public async Task<ActionResult<List<ProjectIncludingDesignObjectResponce>>> GetInludingDesignObjects()
+    { 
+        return Ok(await _projectsService.GetInludingDesignObjects());
     }
+
 }

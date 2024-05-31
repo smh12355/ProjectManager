@@ -11,6 +11,7 @@ public static class ConfigureServices
 
         services.AddScoped<IProjectsService, ProjectsService>();
         services.AddScoped<IDesignObjectsService, DesignObjectsService>();
+        services.AddScoped<IDocSetService, DocSetService>();
 
         return services;
     }

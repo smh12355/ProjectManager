@@ -2,7 +2,6 @@
 using ProjectManager.Application.Abstractions;
 using ProjectManager.Application.Services;
 using ProjectManager.Domain.Contracts.DesignObject;
-using ProjectManager.Domain.Models;
 
 namespace ProjectManager.Controllers;
 
@@ -20,7 +19,7 @@ public class DesignObjectController : ControllerBase
 
     }
 	[HttpGet()]
-	public async Task<ActionResult<List<DesignObjectResponce>>> GetByProjectId([FromRoute]int projectId)
+	public async Task<ActionResult<DesignObjectTreeResponce>> GetByProjectId([FromRoute]int projectId)
 	{
         var responce = await _projectsService.GetById(projectId);
         if (responce is null)
