@@ -16,13 +16,13 @@ public class DosSetController : ControllerBase
         _docSetService = docSetService;
     }
 
-    [HttpGet("ByProject")]
-    public async Task<ActionResult<List<DocSetByProjectResponce>>> GetByProject(int ProjectId)
+    [HttpGet("ByProject/{ProjectId}")]
+    public async Task<ActionResult<List<DocSetByProjectResponce>>> GetByProject([FromRoute] int ProjectId)
     {
         return Ok(await _docSetService.GetByProject(ProjectId));
     }
-    [HttpGet("ByDesignObject")]
-    public async Task<ActionResult<List<DocSetByProjectResponce>>> GetByDesignObject(int DesignObjectId)
+    [HttpGet("ByDesignObject/{DesignObjectId}")]
+    public async Task<ActionResult<List<DocSetByProjectResponce>>> GetByDesignObject([FromRoute] int DesignObjectId)
     {
         return Ok(await _docSetService.GetByDesignObject(DesignObjectId));
     }

@@ -21,7 +21,7 @@ public class ProjectController : ControllerBase
     }
 
     [HttpGet("{ProjectId}")]
-    public async Task<ActionResult<ProjectResponce>> GetById(int ProjectId)
+    public async Task<ActionResult<ProjectResponce>> GetById([FromRoute] int ProjectId)
     {
         var responce = await _projectsService.GetById(ProjectId);
         if (responce is null)

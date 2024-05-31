@@ -14,16 +14,16 @@
    - `/api/Project/IncludeDesignObjects` - получение проектов с дизайн объектами в древовидной структуре.
 
 ### Получение данных таблицы справа
-- По проекту: `/api/Project/DesignObject/DosSet/ByProject`
-- По дизайн объекту: `/api/Project/DesignObject/DosSet/ByDesignObject`
+- По проекту: `/api/Project/DesignObject/DosSet/ByProject/{ProjectId}`
+- По дизайн объекту: `/api/Project/DesignObject/DosSet/ByDesignObject/{DesignObjectId}`
 
 ## Инициализация базы данных
-1. В корне репозитория выполните команду:
+1. В каталоге `ProjectManager` репозитория выполните команду:
    ```sh
    docker-compose up
    ```
    **Примечание**: Docker Hub заблокирован, поэтому образ MySQL пока не подтягивается.
-2. Примените миграции:
+2. Примените миграции в корне репозитория:
    ```sh
    dotnet ef database update -s ProjectManager --project ProjectManager.Infrastructure/
    ```
