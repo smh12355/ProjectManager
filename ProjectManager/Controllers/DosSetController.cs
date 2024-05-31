@@ -16,9 +16,14 @@ public class DosSetController : ControllerBase
         _docSetService = docSetService;
     }
 
-    [HttpGet]
-    public async Task<ActionResult<List<DocSetByProjectResponce>>> Get()
+    [HttpGet("ByProject")]
+    public async Task<ActionResult<List<DocSetByProjectResponce>>> GetByProject(int ProjectId)
     {
-        return Ok(await _docSetService.Get());
+        return Ok(await _docSetService.GetByProject(ProjectId));
+    }
+    [HttpGet("ByDesignObject")]
+    public async Task<ActionResult<List<DocSetByProjectResponce>>> GetByDesignObject(int DesignObjectId)
+    {
+        return Ok(await _docSetService.GetByDesignObject(DesignObjectId));
     }
 }
