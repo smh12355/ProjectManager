@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProjectManager.Application.Abstractions;
+using ProjectManager.Application.Extensions;
+using ProjectManager.Domain.Common.Extensions;
 using ProjectManager.Domain.Contracts.DesignObject;
 using ProjectManager.Domain.Contracts.Project;
 using ProjectManager.Domain.Entities;
@@ -24,32 +26,29 @@ public class ProjectsService : IProjectsService
             .Select(a => new ProjectResponce(a.Id, a.Cipher, a.Name))
             .ToListAsync();
 
-#pragma warning disable CS8603 // Возможно, возврат ссылки, допускающей значение NULL.
     public async Task<ProjectResponce> GetById(int id) => await _dbContext.Projects
             .AsNoTracking()
             .Where(a => a.Id == id)
             .Select(a => new ProjectResponce(a.Id, a.Cipher, a.Name))
             .FirstOrDefaultAsync();
-#pragma warning restore CS8603 // Возможно, возврат ссылки, допускающей значение NULL.
-
-#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
-    public async Task<List<ProjectIncludingDesignObjectResponce>> GetListInludingDesignObjects() => await _dbContext.Projects
+    public async Task<List<ProjectIncludingDesignObjectResponce>> GetListInludingDesignObjects()
+    {
+        var responce = await _dbContext.Projects
             .AsNoTracking()
-            .Select(a => new ProjectIncludingDesignObjectResponce(
-                a.Id,
-                a.Name,
-                a.Cipher,
-                a.DesignObjects.Select(b => new DesignObjectResponce(
-                    b.Id,
-                    b.ParentDesignObjectId,
-                    b.Code,
-                    b.Name)).ToList()
-                )).ToListAsync();
-#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
-
-#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
-#pragma warning disable CS8620 // Аргумент запрещено использовать для параметра из-за различий в отношении допустимости значений NULL для ссылочных типов.
-#pragma warning disable CS8603 // Возможно, возврат ссылки, допускающей значение NULL.
+            .Include(a => a.DesignObjects)
+            .ToListAsync();
+        var somelist = new List<ProjectIncludingDesignObjectResponce>();
+        foreach (var item in responce)
+        {
+            var somelist1 = new List<DesignObjectTreeResponce>();
+            foreach (var obj in item.DesignObjects)
+            {
+                somelist1.Add(MapChilds(obj, item.DesignObjects.ToList()));
+            }
+            somelist.Add(new ProjectIncludingDesignObjectResponce(item.Id,item.Cipher, item.Name, somelist1));
+        }
+        return somelist;
+    }
     public async Task<ProjectDetailsDto> GetFullDataByClick(int id)
     {
         //var test = _dbContext.Projects
@@ -105,40 +104,44 @@ public class ProjectsService : IProjectsService
         var projects = _dbContext.Projects
             .AsNoTracking()
             .Include(a => a.DesignObjects)
-            .ThenInclude(a => a.ParentDesignObject)
             .ToList();
-        var anotherprojects = _dbContext.DesignObjects
-            .AsNoTracking()
-            .Include(a => a.ChildrenDesignObjects);
+        //var projectsq = _dbContext.DesignObjects
+        //    .AsNoTracking();
+
+        var asd = projects.First().DesignObjects.ToList();
+        var test = MapChilds(asd[0], asd);
+        //var anotherprojects = _dbContext.DesignObjects
+        //    .AsNoTracking()
+        //    .IncludeAllParents(d => d.ParentDesignObject);
         //var mydatalist = new List<new { int Cipher, string FullCode } >();
-        var mydatalist = new List<(string Cipher, string FullCode)>();
-        foreach (var project in projects)
-        {
-            foreach (var designOjbect in project.DesignObjects)
-            {
-                var fullCode = new StringBuilder();
-                var indicate = designOjbect;
-                if (indicate.ChildrenDesignObjects.Count is 0)
-                {
-                    mydatalist.Add((project.Cipher, indicate.Code));
-                    continue;
-                }
-                else
-                {
-                    while (indicate.ChildrenDesignObjects.Count is not 0)
-                    {
-                        fullCode.Append(indicate.Code);
-                        fullCode.Append('.');
-                        indicate = designOjbect.ParentDesignObject;
-                        foreach (var item in mydatalist)
-                        {
-                            
-                        }
-                    }
-                }
-                mydatalist.Add((project.Cipher, fullCode.ToString()));
-            }
-        }
+        //var mydatalist = new List<(string Cipher, string FullCode)>();
+        //foreach (var project in projects)
+        //{
+        //    foreach (var designOjbect in project.DesignObjects)
+        //    {
+        //        var fullCode = new StringBuilder();
+        //        var indicate = designOjbect;
+        //        if (indicate.ChildrenDesignObjects.Count is 0)
+        //        {
+        //            mydatalist.Add((project.Cipher, indicate.Code));
+        //            continue;
+        //        }
+        //        else
+        //        {
+        //            while (indicate.ChildrenDesignObjects.Count is not 0)
+        //            {
+        //                fullCode.Append(indicate.Code);
+        //                fullCode.Append('.');
+        //                indicate = designOjbect.ParentDesignObject;
+        //                foreach (var item in mydatalist)
+        //                {
+
+        //                }
+        //            }
+        //        }
+        //        mydatalist.Add((project.Cipher, fullCode.ToString()));
+        //    }
+        //}
         //void somefunc(var1,var2,var3)
         //{
 
@@ -156,12 +159,20 @@ public class ProjectsService : IProjectsService
             designObject.Name,
             docSet.Id,
             docSet.Mark.ToString(),
-            docSet.Mark.GetMark(),
+            docSet.Mark.GetName(),
             docSet.Number
             )))).ToListAsync();
     }
-#pragma warning restore CS8603 // Возможно, возврат ссылки, допускающей значение NULL.
-#pragma warning restore CS8620 // Аргумент запрещено использовать для параметра из-за различий в отношении допустимости значений NULL для ссылочных типов.
-#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
-
+    private static DesignObjectTreeResponce MapChilds(DesignObjectEntity parent, List<DesignObjectEntity> DesignObjects)
+    {
+        var Childs = new List<DesignObjectTreeResponce>();
+        foreach (var item in DesignObjects)
+        {
+            if (item.ParentDesignObjectId == parent.Id) 
+            {
+                Childs.Add(MapChilds(item,DesignObjects));
+            }
+        }
+        return new DesignObjectTreeResponce(parent.Id, parent.ParentDesignObjectId,parent.Code, Childs);
+    }
 }

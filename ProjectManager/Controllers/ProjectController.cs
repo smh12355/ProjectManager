@@ -5,7 +5,7 @@ using ProjectManager.Domain.Models;
 
 namespace ProjectManager.Controllers;
 [ApiController]
-[Route("api")]
+[Route("api/[controller]")]
 public class ProjectController : ControllerBase
 {
     private readonly IProjectsService _projectsService;
@@ -15,11 +15,11 @@ public class ProjectController : ControllerBase
         _projectsService = projectsService;
     }
 
-    [HttpGet("ProjectsList")]
+    [HttpGet]
     public async Task<ActionResult<List<ProjectResponce>>> GetList() =>
         Ok(await _projectsService.GetList());
 
-    [HttpGet("Project/{ProjectId}")]
+    [HttpGet("{ProjectId}")]
     public async Task<ActionResult<ProjectResponce>> GetById(int ProjectId)
     {
         var responce = await _projectsService.GetById(ProjectId);

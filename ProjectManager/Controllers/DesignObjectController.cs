@@ -7,7 +7,7 @@ using ProjectManager.Domain.Models;
 namespace ProjectManager.Controllers;
 
 [ApiController]
-[Route("api")]
+[Route("api/Project/{projectId}/[controller]")]
 public class DesignObjectController : ControllerBase
 {
     private readonly IDesignObjectsService _designObjectsService;
@@ -19,8 +19,8 @@ public class DesignObjectController : ControllerBase
         _projectsService = projectsService;
 
     }
-	[HttpGet("DesignObjects/{projectId}")]
-	public async Task<ActionResult<List<DesignObjectResponce>>> GetByProjectId(int projectId)
+	[HttpGet()]
+	public async Task<ActionResult<List<DesignObjectResponce>>> GetByProjectId([FromRoute]int projectId)
 	{
         var responce = await _projectsService.GetById(projectId);
         if (responce is null)

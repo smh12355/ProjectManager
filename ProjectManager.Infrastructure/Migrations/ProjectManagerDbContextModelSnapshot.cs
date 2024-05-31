@@ -57,10 +57,9 @@ namespace ProjectManager.Infrastructure.Migrations
                     b.Property<int?>("DesignObjectId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Mark")
-                        .IsRequired()
+                    b.Property<int>("Mark")
                         .HasMaxLength(2)
-                        .HasColumnType("varchar(2)");
+                        .HasColumnType("int");
 
                     b.Property<int>("Number")
                         .HasColumnType("int");

@@ -11,8 +11,8 @@ using ProjectManager.Infrastructure;
 namespace ProjectManager.Infrastructure.Migrations
 {
     [DbContext(typeof(ProjectManagerDbContext))]
-    [Migration("20240530110304_init")]
-    partial class init
+    [Migration("20240530172922_push_data")]
+    partial class push_data
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -59,10 +59,9 @@ namespace ProjectManager.Infrastructure.Migrations
                     b.Property<int?>("DesignObjectId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Mark")
-                        .IsRequired()
+                    b.Property<int>("Mark")
                         .HasMaxLength(2)
-                        .HasColumnType("varchar(2)");
+                        .HasColumnType("int");
 
                     b.Property<int>("Number")
                         .HasColumnType("int");
