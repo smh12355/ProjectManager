@@ -6,7 +6,7 @@ using ProjectManager.Domain.Contracts.DocSet;
 namespace ProjectManager.Controllers;
 
 [ApiController]
-[Route("api/Project/DesignObject/[controller]")]
+[Route("/api/Project")]
 public class DosSetController : ControllerBase
 {
     private readonly IDocSetService _docSetService;
@@ -16,14 +16,14 @@ public class DosSetController : ControllerBase
         _docSetService = docSetService;
     }
 
-    [HttpGet("ByProject/{ProjectId}")]
-    public async Task<ActionResult<List<DocSetByProjectResponce>>> GetByProject([FromRoute] int ProjectId)
+    [HttpGet("{projectId}/DesignObject/[controller]/GetByProject")]
+    public async Task<ActionResult<List<DocSetByProjectResponce>>> GetByProject([FromRoute] int projectId)
     {
-        return Ok(await _docSetService.GetByProject(ProjectId));
+        return Ok(await _docSetService.GetByProject(projectId));
     }
-    [HttpGet("ByDesignObject/{DesignObjectId}")]
-    public async Task<ActionResult<List<DocSetByProjectResponce>>> GetByDesignObject([FromRoute] int DesignObjectId)
+    [HttpGet("DesignObject/{designObjectId}/[controller]/GetByDesignObject")]
+    public async Task<ActionResult<List<DocSetByProjectResponce>>> GetByDesignObject([FromRoute] int designObjectId)
     {
-        return Ok(await _docSetService.GetByDesignObject(DesignObjectId));
+        return Ok(await _docSetService.GetByDesignObject(designObjectId));
     }
 }

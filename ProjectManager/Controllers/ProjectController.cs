@@ -20,13 +20,13 @@ public class ProjectController : ControllerBase
         return Ok(await _projectsService.GetList());
     }
 
-    [HttpGet("{ProjectId}")]
-    public async Task<ActionResult<ProjectResponce>> GetById([FromRoute] int ProjectId)
+    [HttpGet("{projectId}")]
+    public async Task<ActionResult<ProjectResponce>> GetById([FromRoute] int projectId)
     {
-        var responce = await _projectsService.GetById(ProjectId);
+        var responce = await _projectsService.GetById(projectId);
         if (responce is null)
         {
-            return NotFound(new { Message = $"Project with ID {ProjectId} was not found." });
+            return NotFound(new { Message = $"Project with ID {projectId} was not found." });
         }
         return Ok(responce);
     }

@@ -42,32 +42,32 @@ public class ProjectsService : IProjectsService
             .AsNoTracking()
             .Include(a => a.DesignObjects)
             .ToListAsync();
-        var somelist = new List<ProjectIncludingDesignObjectResponce>();
+        var result = new List<ProjectIncludingDesignObjectResponce>();
         foreach (var project in responce)
         {
-            var somelist1 = new List<DesignObjectTreeResponce>();
+            var tree = new List<DesignObjectTreeResponce>();
             foreach (var designobject in project.DesignObjects)
             {
                 if (designobject.ParentDesignObjectId == null)
                 { 
-                    somelist1.Add(MapChilds(designobject, project.DesignObjects.ToList()));
+                    tree.Add(MapChilds(designobject, project.DesignObjects.ToList()));
                 }
             }
-            somelist.Add(new ProjectIncludingDesignObjectResponce(project.Id,project.Cipher, project.Name, somelist1));
+            result.Add(new ProjectIncludingDesignObjectResponce(project.Id, project.Cipher, project.Name, tree));
         }
-        return somelist;
+        return result;
     }
 
-    private static DesignObjectTreeResponce MapChilds(DesignObjectEntity parent, List<DesignObjectEntity> DesignObjects)
+    private static DesignObjectTreeResponce MapChilds(DesignObjectEntity parent, List<DesignObjectEntity> designObjects)
     {
-        var Childs = new List<DesignObjectTreeResponce>();
-        foreach (var item in DesignObjects)
+        var childs = new List<DesignObjectTreeResponce>();
+        foreach (var item in designObjects)
         {
             if (item.ParentDesignObjectId == parent.Id) 
             {
-                Childs.Add(MapChilds(item,DesignObjects));
+                childs.Add(MapChilds(item, designObjects));
             }
         }
-        return new DesignObjectTreeResponce(parent.Id, parent.ParentDesignObjectId,parent.Code, Childs);
+        return new DesignObjectTreeResponce(parent.Id, parent.ParentDesignObjectId,parent.Code, childs);
     }
 }

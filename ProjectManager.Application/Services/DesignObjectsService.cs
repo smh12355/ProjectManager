@@ -15,29 +15,29 @@ public class DesignObjectsService : IDesignObjectsService
 
     public async Task<DesignObjectTreeResponce> GetByProjectId(int projectId)
     {
-        var responce = await _dbContext.DesignObjects
+        var result = await _dbContext.DesignObjects
             .AsNoTracking()
             .Where(a => a.ProjectId == projectId)
             .ToListAsync();
-        foreach (var designObject in responce)
+        foreach (var designObject in result)
         {
             if (designObject.ParentDesignObjectId == null)
             {
-                return MapChilds(designObject, responce);
+                return MapChilds(designObject, result);
             }
         }
         throw new NotImplementedException();
     }
-    private static DesignObjectTreeResponce MapChilds(DesignObjectEntity parent, List<DesignObjectEntity> DesignObjects)
+    private static DesignObjectTreeResponce MapChilds(DesignObjectEntity parent, List<DesignObjectEntity> designObjects)
     {
-        var Childs = new List<DesignObjectTreeResponce>();
-        foreach (var item in DesignObjects)
+        var childs = new List<DesignObjectTreeResponce>();
+        foreach (var item in designObjects)
         {
             if (item.ParentDesignObjectId == parent.Id)
             {
-                Childs.Add(MapChilds(item, DesignObjects));
+                childs.Add(MapChilds(item, designObjects));
             }
         }
-        return new DesignObjectTreeResponce(parent.Id, parent.ParentDesignObjectId, parent.Code, Childs);
+        return new DesignObjectTreeResponce(parent.Id, parent.ParentDesignObjectId, parent.Code, childs);
     }
 }

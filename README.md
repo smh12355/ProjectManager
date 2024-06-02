@@ -14,8 +14,8 @@
    - `/api/Project/IncludeDesignObjects` - получение проектов с дизайн объектами в древовидной структуре.
 
 ### Получение данных таблицы справа
-- По проекту: `/api/Project/DesignObject/DosSet/ByProject/{ProjectId}`
-- По дизайн объекту: `/api/Project/DesignObject/DosSet/ByDesignObject/{DesignObjectId}`
+- По проекту: `/api/Project/{projectId}/DesignObject/DocSet/GetByProject`
+- По дизайн объекту: `/api/Project/DesignObject/{designObjectId}/DocSet/GetByDesignObject`
 
 ## Инициализация базы данных
 1. В каталоге `ProjectManager` репозитория выполните команду:
@@ -28,6 +28,3 @@
    ```
 3. Запустите решение и протестируйте API с помощью Swagger.
 
-## Примечания
-- Методы рекурсии были сделаны на скорую руку и могут быть оптимизированы. Планирую исправить это на выходных.
-- Фильтрация пока не добавлена, но она также будет добавлена на выходных.

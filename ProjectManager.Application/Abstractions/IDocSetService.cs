@@ -4,7 +4,7 @@ namespace ProjectManager.Application.Abstractions
 {
     public interface IDocSetService
     {
-        Task<List<DocSetByProjectResponce>> GetByProject(int ProjectId);
-        Task<List<DocSetByProjectResponce>> GetByDesignObject(int DesignObjectId);
+        Task<List<DocSetByProjectResponce>> GetByProject(int projectId);
+        Task<List<DocSetByProjectResponce>> GetByDesignObject(int designObjectId);
     }
 }
