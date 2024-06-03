@@ -18,13 +18,11 @@
 - По дизайн объекту: `/api/Project/DesignObject/{designObjectId}/DocSet/GetByDesignObject`
 
 ## Инициализация базы данных
-1. В каталоге `ProjectManager` репозитория выполните команду:
+1. В корне репозитория выполните команду:
    ```sh
    docker-compose up
    ```
-2. Примените миграции в корне репозитория:
-   ```sh
-   dotnet ef database update -s ProjectManager --project ProjectManager.Infrastructure/
-   ```
-3. Запустите решение и протестируйте API с помощью Swagger.
+2. В веб-браузере перейдите по:
+   http://localhost:8080/swagger
+3. Протестируйте API с помощью Swagger.
 

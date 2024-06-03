@@ -15,7 +15,9 @@ services:
       - db_data:/var/lib/mysql
 
   app:
-    image: ghcr.io/smh12355/projectmanager:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: projectmanager_app
     depends_on:
       - db

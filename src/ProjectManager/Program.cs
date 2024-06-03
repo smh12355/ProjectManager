@@ -1,5 +1,6 @@
 using ProjectManager.Infrastructure;
 using ProjectManager.Application;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProjectManager;
 
@@ -20,6 +21,20 @@ public class Program
 
         var app = builder.Build();
 
+        using (var scope = app.Services.CreateScope())
+        {
+            var services = scope.ServiceProvider;
+            try
+            {
+                var context = services.GetRequiredService<ProjectManagerDbContext>(); // Замените на ваш DbContext
+                context.Database.Migrate();
+            }
+            catch (Exception ex)
+            {
+                var logger = services.GetRequiredService<ILogger<Program>>();
+                logger.LogError(ex, "An error occurred while migrating or initializing the database.");
+            }
+        }
         // смотрим launchSettings.json
         if (app.Environment.IsDevelopment())
         {
