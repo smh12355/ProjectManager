@@ -23,12 +23,7 @@ public class ProjectController : ControllerBase
     [HttpGet("{projectId}")]
     public async Task<ActionResult<ProjectResponce>> GetById([FromRoute] int projectId)
     {
-        var responce = await _projectsService.GetById(projectId);
-        if (responce is null)
-        {
-            return NotFound(new { Message = $"Project with ID {projectId} was not found." });
-        }
-        return Ok(responce);
+        return Ok(await _projectsService.GetById(projectId));
     }
 
     [HttpGet("IncludeDesignObjects")]

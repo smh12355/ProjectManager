@@ -28,6 +28,11 @@ public class DocSetService : IDocSetService
             .Where(a => a.Id == projectId)
             .ToListAsync();
 
+        if (allEntitiesLinked.Count == 0)
+        {
+            throw new ArgumentException($"Project with ID {projectId} was not found.");
+        }
+
         var result = new List<DocSetByProjectResponce>();
         foreach (var project in allEntitiesLinked)
         {
@@ -62,10 +67,23 @@ public class DocSetService : IDocSetService
             .Where(a => a.Id == designObjectId)
             .FirstOrDefault();
 
+        if (parent == null)
+        {
+            throw new ArgumentException($"DesignObject with ID {designObjectId} was not found.");
+        }
+        if (parent.Project == null)
+        {
+            throw new InvalidOperationException($"DesignObject with ID {designObjectId} does not have an associated project.");
+        }
+
         var treeByParent = MapDesignObjectsTree(parent);
         var result = new List<DocSetByProjectResponce>();
         foreach (var designObject in treeByParent)
         {
+            if (designObject.Project == null)
+            {
+                throw new InvalidOperationException($"DesignObject with ID {designObject.Id} does not have an associated project.");
+            }
             var counter = 0;
             foreach (var docSet in designObject.DocSets)
             {

@@ -21,11 +21,6 @@ public class DesignObjectController : ControllerBase
 	[HttpGet()]
 	public async Task<ActionResult<DesignObjectTreeResponce>> GetByProjectId([FromRoute]int projectId)
 	{
-        var responce = await _projectsService.GetById(projectId);
-        if (responce is null)
-        {
-            return NotFound(new { Message = $"Project with ID {projectId} was not found." });
-        }
-        return await _designObjectsService.GetByProjectId(projectId);
+        return Ok(await _designObjectsService.GetByProjectId(projectId));
 	}
 }

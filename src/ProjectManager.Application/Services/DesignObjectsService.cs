@@ -26,7 +26,7 @@ public class DesignObjectsService : IDesignObjectsService
                 return MapChilds(designObject, result);
             }
         }
-        throw new NotImplementedException();
+        return null;
     }
     private static DesignObjectTreeResponce MapChilds(DesignObjectEntity parent, List<DesignObjectEntity> designObjects)
     {
