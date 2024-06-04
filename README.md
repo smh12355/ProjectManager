@@ -26,3 +26,5 @@
    http://localhost:8080/swagger
 3. Протестируйте API с помощью Swagger.
 
+## Тестовая ветка с новой структурой, фильтрами и более удобной структурой развертки.
+- https://github.com/smh12355/ProjectManager/tree/test_branch

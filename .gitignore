@@ -29,3 +29,5 @@ project.fragment.lock.json
 # Ignore NuGet packages
 *.nupkg
 packages/
+
+src/
