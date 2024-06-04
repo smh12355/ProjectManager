@@ -14,5 +14,18 @@ services:
     volumes:
       - db_data:/var/lib/mysql
 
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: projectmanager_app
+    depends_on:
+      - db
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=database;Database=db;User=smh;Password=12355;CharSet=utf8mb4;
+    ports:
+      - "8080:80"
+      
 volumes:
   db_data:

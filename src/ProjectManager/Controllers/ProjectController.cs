@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjectManager.Application.Abstractions;
 using ProjectManager.Domain.Contracts.Project;
+using ProjectManager.Filters;
 
 namespace ProjectManager.Controllers;
+
 [ApiController]
 [Route("api/[controller]")]
 public class ProjectController : ControllerBase
@@ -21,14 +23,10 @@ public class ProjectController : ControllerBase
     }
 
     [HttpGet("{projectId}")]
+    [ServiceFilter(typeof(ProjectNotFoundFilter))]
     public async Task<ActionResult<ProjectResponce>> GetById([FromRoute] int projectId)
     {
-        var responce = await _projectsService.GetById(projectId);
-        if (responce is null)
-        {
-            return NotFound(new { Message = $"Project with ID {projectId} was not found." });
-        }
-        return Ok(responce);
+        return Ok(await _projectsService.GetById(projectId));
     }
 
     [HttpGet("IncludeDesignObjects")]
