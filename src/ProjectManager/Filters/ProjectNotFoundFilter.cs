@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace ProjectManager.Filters;
 
-public class NotFoundFilter : IAsyncActionFilter
+public class ProjectNotFoundFilter : IAsyncActionFilter
 {
     public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
     {

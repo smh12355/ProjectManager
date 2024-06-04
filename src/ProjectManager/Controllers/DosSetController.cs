@@ -21,6 +21,7 @@ public class DosSetController : ControllerBase
     {
         return Ok(await _docSetService.GetByProject(projectId));
     }
+
     [HttpGet("DesignObject/{designObjectId}/[controller]/GetByDesignObject")]
     public async Task<ActionResult<List<DocSetByProjectResponce>>> GetByDesignObject([FromRoute] int designObjectId)
     {

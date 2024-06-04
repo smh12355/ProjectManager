@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProjectManager.Application.Abstractions;
+using ProjectManager.Application.Exceptions;
 using ProjectManager.Domain.Contracts.DesignObject;
 using ProjectManager.Domain.Entities;
 
@@ -19,6 +20,14 @@ public class DesignObjectsService : IDesignObjectsService
             .AsNoTracking()
             .Where(a => a.ProjectId == projectId)
             .ToListAsync();
+
+        if (await _dbContext.Projects
+            .AsNoTracking()
+            .Where(a => a.Id == projectId)
+            .FirstOrDefaultAsync() is null)
+        {
+            throw new ProjectNotExistException($"project with id:{projectId} dont exist");
+        }
         foreach (var designObject in result)
         {
             if (designObject.ParentDesignObjectId == null)
@@ -26,7 +35,7 @@ public class DesignObjectsService : IDesignObjectsService
                 return MapChilds(designObject, result);
             }
         }
-        return null;
+        throw new ProjectDontHaveDesignObjectsException();
     }
     private static DesignObjectTreeResponce MapChilds(DesignObjectEntity parent, List<DesignObjectEntity> designObjects)
     {

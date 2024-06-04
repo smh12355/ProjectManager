@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjectManager.Application.Abstractions;
 using ProjectManager.Domain.Contracts.Project;
+using ProjectManager.Filters;
 
 namespace ProjectManager.Controllers;
+
 [ApiController]
 [Route("api/[controller]")]
 public class ProjectController : ControllerBase
@@ -21,6 +23,7 @@ public class ProjectController : ControllerBase
     }
 
     [HttpGet("{projectId}")]
+    [ServiceFilter(typeof(ProjectNotFoundFilter))]
     public async Task<ActionResult<ProjectResponce>> GetById([FromRoute] int projectId)
     {
         return Ok(await _projectsService.GetById(projectId));

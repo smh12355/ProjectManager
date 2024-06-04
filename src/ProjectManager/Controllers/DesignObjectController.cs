@@ -16,11 +16,12 @@ public class DesignObjectController : ControllerBase
 	{
 		_designObjectsService = designObjectsService;
         _projectsService = projectsService;
-
     }
+
 	[HttpGet()]
 	public async Task<ActionResult<DesignObjectTreeResponce>> GetByProjectId([FromRoute]int projectId)
 	{
-        return Ok(await _designObjectsService.GetByProjectId(projectId));
+        var responce = await _designObjectsService.GetByProjectId(projectId);
+        return Ok(responce);
 	}
 }
