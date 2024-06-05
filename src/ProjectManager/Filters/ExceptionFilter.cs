@@ -12,13 +12,13 @@ public class ExceptionFilter : IAsyncExceptionFilter
     {
         _exceptionHandlers = new Dictionary<Type, Action<ExceptionContext>>
         {
-            {typeof(ProjectNotExistException), HandleProjectNotExistException },
+            {typeof(ProjectNotExistException),  HandleNotExistException },
             {typeof(ProjectDontHaveDesignObjectsException),  HandleProjectDontHaveDesignObjectsException },
-            {typeof(DesignObjectNotExistException), HandleDesignObjectNotExistException }
+            {typeof(DesignObjectNotExistException), HandleNotExistException }
         };
     }
 
-    private void HandleDesignObjectNotExistException(ExceptionContext context)
+    private void HandleNotExistException(ExceptionContext context)
     {
         context.Result = new ObjectResult(new { Message = context.Exception.Message })
         {
@@ -44,20 +44,11 @@ public class ExceptionFilter : IAsyncExceptionFilter
         HandleNotImplementedException(context);
         return;
     }
-    private void HandleProjectNotExistException(ExceptionContext context)
-    {
-        context.Result = new ObjectResult(new { Message = context.Exception.Message })
-        {
-            StatusCode = 404
-        };
-        context.ExceptionHandled = true;
-    }
-
     private void HandleProjectDontHaveDesignObjectsException(ExceptionContext context)
     {
         context.Result = new ObjectResult(new { })
         {
-            StatusCode = 200
+            StatusCode = 404
         };
         context.ExceptionHandled = true;
     }

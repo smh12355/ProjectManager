@@ -9,25 +9,29 @@ namespace ProjectManager.Application.Services;
 public class DesignObjectsService : IDesignObjectsService
 {
     private readonly IProjectManagerDbContext _dbContext;
-    public DesignObjectsService(IProjectManagerDbContext dbContext)
+    private readonly IProjectsService _projectService;
+
+    public DesignObjectsService(IProjectManagerDbContext dbContext, IProjectsService projectService)
     {
         _dbContext = dbContext;
+        _projectService = projectService;
+
     }
 
     public async Task<DesignObjectTreeResponce> GetByProjectId(int projectId)
     {
+        var project = await _projectService.GetById(projectId);
+        if (project is null)
+        {
+            throw new ProjectNotExistException($"project with id:{projectId} dont exist");
+        }
+
         var result = await _dbContext.DesignObjects
             .AsNoTracking()
             .Where(a => a.ProjectId == projectId)
             .ToListAsync();
 
-        if (await _dbContext.Projects
-            .AsNoTracking()
-            .Where(a => a.Id == projectId)
-            .FirstOrDefaultAsync() is null)
-        {
-            throw new ProjectNotExistException($"project with id:{projectId} dont exist");
-        }
+
         foreach (var designObject in result)
         {
             if (designObject.ParentDesignObjectId == null)

@@ -21,47 +21,42 @@ public class DocSetService : IDocSetService
 
     public async Task<List<DocSetByProjectResponce>> GetByProject(int projectId)
     {
-        var allEntitiesLinked = await _projectManagerDbContext
+        var project = await _projectManagerDbContext
             .Projects
             .AsNoTracking()
             .Include(a => a.DesignObjects)
             .ThenInclude(a => a.DocSets)
-            .Where(a => a.Id == projectId)
-            .ToListAsync();
+            .FirstOrDefaultAsync(a => a.Id == projectId);
 
-        if (allEntitiesLinked.FirstOrDefault() is null)
+        if (project is null)
         {
             throw new ProjectNotExistException($"project with id:{projectId} dont exist");
         }
+
         var result = new List<DocSetByProjectResponce>();
-        if (allEntitiesLinked.FirstOrDefault().DesignObjects.FirstOrDefault() is null)
+
+        if (!project.DesignObjects.Any())
         {
-            result.Add(new DocSetByProjectResponce(allEntitiesLinked.FirstOrDefault().Cipher,
-                                                   null,
-                                                   null,
-                                                   "0",
-                                                   allEntitiesLinked.FirstOrDefault().Cipher)
-                );
             return result;
         }
-        foreach (var project in allEntitiesLinked)
+        
+        foreach (var designObject in project.DesignObjects)
         {
-            foreach (var designObject in project.DesignObjects)
+            var counter = 0;
+            foreach (var docSet in designObject.DocSets)
             {
-                var counter = 0;
-                foreach (var docSet in designObject.DocSets)
-                {
-                    var fullCode = MapFullCode(designObject, project.DesignObjects.ToList()).ToString();
-                    var markPlusNumber = string.Concat(docSet.Mark.ToString(), $"{counter}");
-                    result.Add(new DocSetByProjectResponce(project.Cipher,
-                                                             fullCode,
-                                                             docSet.Mark.ToString(),
-                                                             markPlusNumber,
-                                                             string.Concat(project.Cipher, fullCode, markPlusNumber)));
-                    counter++;
-                }
+                var fullCode = MapFullCode(designObject, project.DesignObjects.ToList()).ToString();
+                var markPlusNumber = string.Concat(docSet.Mark.ToString(), $"{counter}");
+
+                result.Add(new DocSetByProjectResponce(project.Cipher,
+                                                            fullCode,
+                                                            docSet.Mark.ToString(),
+                                                            markPlusNumber,
+                                                            string.Concat(project.Cipher, fullCode, markPlusNumber)));
+                counter++;
             }
         }
+        
         return result;
     }
 
@@ -79,11 +74,13 @@ public class DocSetService : IDocSetService
 
         if (parent is null)
         {
-            throw new DesignObjectNotExistException($"DesignObject with id:{designObjectId} dont exist");
+            throw new DesignObjectNotExistException($"DesignObject with id:{designObjectId} does not exist");
         }
 
         var treeByParent = MapDesignObjectsTree(parent);
+
         var result = new List<DocSetByProjectResponce>();
+
         foreach (var designObject in treeByParent)
         {
             var counter = 0;
@@ -91,6 +88,7 @@ public class DocSetService : IDocSetService
             {
                 var fullcode = MapFullCode(designObject, linkedEntities).ToString();
                 var marcplusnumber = string.Concat(docSet.Mark.ToString(), $"{counter}");
+
                 if (designObject.Project is null)
                 {
                     result.Add(new DocSetByProjectResponce(null,
@@ -98,17 +96,18 @@ public class DocSetService : IDocSetService
                                                          docSet.Mark.ToString(),
                                                          marcplusnumber,
                                                          string.Concat(null, fullcode, marcplusnumber)));
+                    continue;
                 }
-                else
-                {
-                    result.Add(new DocSetByProjectResponce(designObject.Project.Cipher,
-                                                         fullcode,
-                                                         docSet.Mark.ToString(),
-                                                         marcplusnumber,
-                                                         string.Concat(designObject.Project.Cipher, fullcode, marcplusnumber)));
-                }
+
+                result.Add(new DocSetByProjectResponce(designObject.Project.Cipher,
+                                                        fullcode,
+                                                        docSet.Mark.ToString(),
+                                                        marcplusnumber,
+                                                        string.Concat(designObject.Project.Cipher, fullcode, marcplusnumber)));
+                
             }
         }
+
         return result;
     }
 
