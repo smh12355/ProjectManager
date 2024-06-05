@@ -10,6 +10,7 @@ namespace ProjectManager.Controllers;
 public class DesignObjectController : ControllerBase
 {
     private readonly IDesignObjectsService _designObjectsService;
+
     private readonly IProjectsService _projectsService;
 
     public DesignObjectController(IDesignObjectsService designObjectsService, IProjectsService projectsService)
