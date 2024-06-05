@@ -24,12 +24,14 @@ public class ExceptionFilter : IAsyncExceptionFilter
         {
             StatusCode = 404
         };
+
         context.ExceptionHandled = true;
     }
 
     public Task OnExceptionAsync(ExceptionContext context)
     {
         HandleException(context);
+
         return Task.CompletedTask;
     }
     
@@ -41,23 +43,28 @@ public class ExceptionFilter : IAsyncExceptionFilter
             _exceptionHandlers[type].Invoke(context);
             return;
         }
+
         HandleNotImplementedException(context);
         return;
     }
+
     private void HandleProjectDontHaveDesignObjectsException(ExceptionContext context)
     {
         context.Result = new ObjectResult(new { })
         {
             StatusCode = 404
         };
+
         context.ExceptionHandled = true;
     }
+
     private void HandleNotImplementedException(ExceptionContext context)
     {
         context.Result = new ObjectResult(new { Message = "An unexpected error occurred." })
         {
             StatusCode = 500
         };
+
         context.ExceptionHandled = true;
     }
 }

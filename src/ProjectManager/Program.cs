@@ -20,11 +20,6 @@ public class Program
         builder.Services.AddInfrastructureServices(builder.Configuration);
         builder.Services.AddApplicationServices();
 
-        builder.Services.AddScoped<ProjectNotFoundFilter>();
-        //builder.Services.AddControllers(options =>
-        //{
-        //    options.Filters.Add<Filters.NotFoundFilter>();
-        //});
         builder.Services.AddControllers(options =>
         {
             options.Filters.Add<ExceptionFilter>();

@@ -104,7 +104,6 @@ public class DocSetService : IDocSetService
                                                         docSet.Mark.ToString(),
                                                         marcplusnumber,
                                                         string.Concat(designObject.Project.Cipher, fullcode, marcplusnumber)));
-                
             }
         }
 

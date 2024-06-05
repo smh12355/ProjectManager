@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProjectManager.Application.Abstractions;
+using ProjectManager.Application.Exceptions;
 using ProjectManager.Domain.Common.Extensions;
 using ProjectManager.Domain.Contracts.DesignObject;
 using ProjectManager.Domain.Contracts.Project;
@@ -29,11 +30,18 @@ public class ProjectsService : IProjectsService
 
     public async Task<ProjectResponce> GetById(int id)
     {
-        return await _dbContext.Projects
+        var result = await _dbContext.Projects
             .AsNoTracking()
             .Where(a => a.Id == id)
             .Select(a => new ProjectResponce(a.Id, a.Cipher, a.Name))
             .FirstOrDefaultAsync();
+
+        if (result is null)
+        {
+            throw new ProjectNotExistException($"project with id:{id} does not exist");
+        }
+
+        return result;
     }
 
     public async Task<List<ProjectIncludingDesignObjectResponce>> GetInludingDesignObjects()
