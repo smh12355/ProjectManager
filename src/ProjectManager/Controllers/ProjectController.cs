@@ -23,7 +23,6 @@ public class ProjectController : ControllerBase
     }
 
     [HttpGet("{projectId}")]
-    [ServiceFilter(typeof(ProjectNotFoundFilter))]
     public async Task<ActionResult<ProjectResponce>> GetById([FromRoute] int projectId)
     {
         return Ok(await _projectsService.GetById(projectId));

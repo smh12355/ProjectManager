@@ -4,7 +4,7 @@ namespace ProjectManager.Application.Abstractions
 {
     public interface IDesignObjectsService
     {
-        Task<DesignObjectTreeResponce> GetByProjectId(int projectId);
+        Task<List<DesignObjectTreeResponce>> GetByProjectId(int projectId);
 
     }
 }

@@ -19,7 +19,7 @@ public class DesignObjectController : ControllerBase
     }
 
 	[HttpGet()]
-	public async Task<ActionResult<DesignObjectTreeResponce>> GetByProjectId([FromRoute]int projectId)
+	public async Task<ActionResult<List<DesignObjectTreeResponce>>> GetByProjectId([FromRoute]int projectId)
 	{
         var responce = await _designObjectsService.GetByProjectId(projectId);
         return Ok(responce);

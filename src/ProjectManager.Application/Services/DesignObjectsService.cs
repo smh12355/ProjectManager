@@ -15,31 +15,33 @@ public class DesignObjectsService : IDesignObjectsService
     {
         _dbContext = dbContext;
         _projectService = projectService;
-
     }
 
-    public async Task<DesignObjectTreeResponce> GetByProjectId(int projectId)
+    public async Task<List<DesignObjectTreeResponce>> GetByProjectId(int projectId)
     {
         var project = await _projectService.GetById(projectId);
+
         if (project is null)
         {
             throw new ProjectNotExistException($"project with id:{projectId} dont exist");
         }
 
-        var result = await _dbContext.DesignObjects
+        var designObjects = await _dbContext.DesignObjects
             .AsNoTracking()
             .Where(a => a.ProjectId == projectId)
             .ToListAsync();
 
+        var result = new List<DesignObjectTreeResponce>();
 
-        foreach (var designObject in result)
+        foreach (var designObject in designObjects)
         {
             if (designObject.ParentDesignObjectId == null)
             {
-                return MapChilds(designObject, result);
+                result.Add(MapChilds(designObject, designObjects));
             }
         }
-        throw new ProjectDontHaveDesignObjectsException();
+        return result;
+        //throw new ProjectDontHaveDesignObjectsException();
     }
     private static DesignObjectTreeResponce MapChilds(DesignObjectEntity parent, List<DesignObjectEntity> designObjects)
     {

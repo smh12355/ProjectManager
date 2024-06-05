@@ -50,7 +50,9 @@ public class ProjectsService : IProjectsService
             .AsNoTracking()
             .Include(a => a.DesignObjects)
             .ToListAsync();
+
         var result = new List<ProjectIncludingDesignObjectResponce>();
+
         foreach (var project in responce)
         {
             var tree = new List<DesignObjectTreeResponce>();
@@ -63,12 +65,14 @@ public class ProjectsService : IProjectsService
             }
             result.Add(new ProjectIncludingDesignObjectResponce(project.Id, project.Cipher, project.Name, tree));
         }
+
         return result;
     }
 
     private static DesignObjectTreeResponce MapChilds(DesignObjectEntity parent, List<DesignObjectEntity> designObjects)
     {
         var childs = new List<DesignObjectTreeResponce>();
+
         foreach (var item in designObjects)
         {
             if (item.ParentDesignObjectId == parent.Id) 
@@ -76,6 +80,7 @@ public class ProjectsService : IProjectsService
                 childs.Add(MapChilds(item, designObjects));
             }
         }
+
         return new DesignObjectTreeResponce(parent.Id, parent.ParentDesignObjectId,parent.Code, childs);
     }
 }
