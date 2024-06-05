@@ -1,0 +1,13 @@
+2024-06-05 15:48:05.5399|WARN|ProjectManager.Filters.ExceptionFilter|Resource not found: project with id:5 does not exist ProjectManager.Application.Exceptions.ProjectNotExistException: project with id:5 does not exist
+   at ProjectManager.Application.Services.ProjectsService.GetById(Int32 id) in C:\Users\krik6\OneDrive\Рабочий стол\pm\ProjectManager\src\ProjectManager.Application\Services\ProjectsService.cs:line 41
+   at ProjectManager.Application.Services.DesignObjectsService.GetByProjectId(Int32 projectId) in C:\Users\krik6\OneDrive\Рабочий стол\pm\ProjectManager\src\ProjectManager.Application\Services\DesignObjectsService.cs:line 22
+   at ProjectManager.Controllers.DesignObjectController.GetByProjectId(Int32 projectId) in C:\Users\krik6\OneDrive\Рабочий стол\pm\ProjectManager\src\ProjectManager\Controllers\DesignObjectController.cs:line 25
+   at lambda_method9(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextExceptionFilterAsync>g__Awaited|26_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)

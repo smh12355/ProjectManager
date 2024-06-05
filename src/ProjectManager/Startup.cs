@@ -3,6 +3,8 @@ using ProjectManager.Filters;
 using ProjectManager.Infrastructure;
 using ProjectManager.Application;
 using Microsoft.EntityFrameworkCore;
+using NLog;
+using NLog.Extensions.Logging;
 
 namespace ProjectManager;
 
@@ -19,6 +21,12 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
+        services.AddLogging(loggingBuilder =>
+        {
+            loggingBuilder.ClearProviders();
+            loggingBuilder.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
+            loggingBuilder.AddNLog("nlog.config");
+        });
         // Контроллеры
         services.AddControllers();
 

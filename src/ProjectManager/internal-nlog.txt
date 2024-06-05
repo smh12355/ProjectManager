@@ -1,0 +1,26 @@
+2024-06-05 15:31:45.6450 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-06-05 15:31:45.6755 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.3.2.2526. Product version: 5.3.2+8d52d4f3fcdbd84beae3442e1fdc8125598ed81f. GlobalAssemblyCache: False
+2024-06-05 15:31:45.6997 Info Validating config: TargetNames=logfile, ConfigItems=14, FilePath=C:\Users\krik6\OneDrive\Рабочий стол\pm\ProjectManager\src\ProjectManager\bin\Debug\net6.0\nlog.config
+2024-06-05 15:31:45.7168 Info Configuration initialized.
+2024-06-05 15:35:04.0504 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-06-05 15:35:04.0800 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.3.2.2526. Product version: 5.3.2+8d52d4f3fcdbd84beae3442e1fdc8125598ed81f. GlobalAssemblyCache: False
+2024-06-05 15:35:04.1049 Info Validating config: TargetNames=logfile, ConfigItems=14, FilePath=C:\Users\krik6\OneDrive\Рабочий стол\pm\ProjectManager\src\ProjectManager\bin\Debug\net6.0\nlog.config
+2024-06-05 15:35:04.1276 Info Configuration initialized.
+2024-06-05 15:38:31.7259 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-06-05 15:38:31.7643 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.3.2.2526. Product version: 5.3.2+8d52d4f3fcdbd84beae3442e1fdc8125598ed81f. GlobalAssemblyCache: False
+2024-06-05 15:38:31.8027 Info Validating config: TargetNames=logfile, ConfigItems=14, FilePath=C:\Users\krik6\OneDrive\Рабочий стол\pm\ProjectManager\src\ProjectManager\bin\Debug\net6.0\nlog.config
+2024-06-05 15:38:31.8332 Info Configuration initialized.
+2024-06-05 15:40:10.9050 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-06-05 15:40:10.9640 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.3.2.2526. Product version: 5.3.2+8d52d4f3fcdbd84beae3442e1fdc8125598ed81f. GlobalAssemblyCache: False
+2024-06-05 15:40:11.0060 Info Validating config: TargetNames=logfile, ConfigItems=14, FilePath=C:\Users\krik6\OneDrive\Рабочий стол\pm\ProjectManager\src\ProjectManager\bin\Debug\net6.0\nlog.config
+2024-06-05 15:40:11.0444 Info Configuration initialized.
+2024-06-05 15:41:44.0142 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-06-05 15:41:44.0484 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.3.2.2526. Product version: 5.3.2+8d52d4f3fcdbd84beae3442e1fdc8125598ed81f. GlobalAssemblyCache: False
+2024-06-05 15:41:44.0816 Info Validating config: TargetNames=logfile, ConfigItems=14, FilePath=C:\Users\krik6\OneDrive\Рабочий стол\pm\ProjectManager\src\ProjectManager\bin\Debug\net6.0\nlog.config
+2024-06-05 15:41:44.1140 Info Configuration initialized.
+2024-06-05 15:47:56.5474 Info Registered target NLog.Targets.FileTarget(Name=infoLogfile)
+2024-06-05 15:47:56.5474 Info Registered target NLog.Targets.FileTarget(Name=warnLogfile)
+2024-06-05 15:47:56.5474 Info Registered target NLog.Targets.FileTarget(Name=errorLogfile)
+2024-06-05 15:47:56.5970 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.3.2.2526. Product version: 5.3.2+8d52d4f3fcdbd84beae3442e1fdc8125598ed81f. GlobalAssemblyCache: False
+2024-06-05 15:47:56.6298 Info Validating config: TargetNames=infoLogfile, warnLogfile, errorLogfile, ConfigItems=42, FilePath=C:\Users\krik6\OneDrive\Рабочий стол\pm\ProjectManager\src\ProjectManager\bin\Debug\net6.0\nlog.config
+2024-06-05 15:47:56.6844 Info Configuration initialized.
