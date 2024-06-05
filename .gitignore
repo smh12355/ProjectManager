@@ -14,7 +14,6 @@ obj/
 
 # Ignore temporary files and logs
 *.tmp
-*.log
 *.pdb
 
 
